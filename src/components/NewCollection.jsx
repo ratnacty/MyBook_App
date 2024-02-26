@@ -10,7 +10,7 @@ import { FaAnglesRight } from "react-icons/fa6"
 export default function NewCollection() {
   return (
     <div>
-       <div className="flex">
+             <div className="flex">
                   <h1 className="text-2xl font-serif text-blue-900 mb-5 mt-8 mx-8">New Collection</h1>
                     <div>
                     <FaAnglesRight className="fill-blue-900 mb-5 my-10" />

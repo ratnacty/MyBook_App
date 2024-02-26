@@ -15,7 +15,7 @@ export default function Popular() {
                      Quae eligendi maxime sunt animi, perspiciatis assumenda. <br />
                      Quae eligendi maxime sunt animi, perspiciatis assumenda.</p>
 
-                     <button className="py-2 px-2 bg-white text-blue-900 text-sm mt-5 rounded shadow-slate-700 shadow-lg">Explore More</button>
+                     <button className="py-2 px-2 bg-white text-blue-900 text-sm mt-5 rounded shadow-slate-700 shadow-lg hover:bg-violet-600 hover:text-white">Explore More</button>
                   </div>
 
                   <div className="flex">
