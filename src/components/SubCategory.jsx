@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function SubCategory() {
   return (
-    <div className='basis-1/4 bg-violet-300 px-8 py-5 text-white text-normal pb-24 rounded-lg'>
+    <div className='basis-1/4 bg-violet-300 px-10 py-5 text-white text-normal pb-24 rounded-lg'>
       
                 <h3 className='text-xl mb-2  font-semibold'>Popular Category :</h3>
                 <hr />

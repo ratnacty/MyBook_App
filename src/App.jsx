@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AllCategory from "./pages/AllCategory.jsx";
 import Home from "./pages/Home.jsx";
 import Collection from "./pages/Collection.jsx";
+import Detail from "./pages/Detail.jsx";
 
 function App() {
   
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/all-category" element={<AllCategory />} />
             <Route path="/collection" element={<Collection />} />
+            <Route path="/detail" element={<Detail />} />
 
         </Routes>
     </BrowserRouter>

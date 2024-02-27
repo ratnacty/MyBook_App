@@ -17,7 +17,7 @@ export default function AllCategory() {
 
        <SubHeader/>
 
-        <div className=' w-11/12 flex flex-row justify-center gap-4 mx-16 my-12'>
+        <div className=' w-11/12 flex flex-row justify-center gap-5 mx-20 my-12'>
             
             <SubCategory/>
 
