@@ -4,12 +4,13 @@ import recomend1 from "../assets/recomend1.png"
 import recomend3 from "../assets/recomend3.png"
 import recomend4 from "../assets/recomend4.jpg"
 import { FaAnglesRight } from "react-icons/fa6"
+import { Link } from 'react-router-dom'
 
 export default function Recomendation() {
   return (
     <div>
       <div className="flex">
-                    <h1 className="text-2xl font-serif text-blue-900 mb-5 mx-8 my-2">Recomendation  </h1>
+                    <h1 className="text-2xl font-serif text-blue-900 mb-5 mx-8 my-2">Recomendation</h1>
                     <div>
                       <FaAnglesRight className="fill-blue-900 mb-5 my-4" />
                     </div>
@@ -26,8 +27,8 @@ export default function Recomendation() {
                           <p>Book Title</p>
                           <p>Author</p>
                           <p>Publisher date</p>
-                          <p>Publisher</p>
-                          <button className="text-sm text-white bg-blue-900 px-4 py-1 rounded-lg ml-32 mt-1">More</button>
+                          <p className='mb-2'>Publisher</p>
+                          <Link to="/detail" className="text-sm text-white bg-blue-900 px-4 py-1 rounded-lg ml-32 mt-1 hover:bg-violet-600">More</Link>
                         </div>
                     </div>
 
@@ -39,8 +40,8 @@ export default function Recomendation() {
                         <p>Book Title</p>
                         <p>Author</p>
                         <p>Publisher date</p>
-                        <p>Publisher</p>
-                        <button className="text-sm text-white bg-blue-900 px-4 py-1 rounded-lg ml-32 mt-1">More</button>
+                        <p className='mb-2'>Publisher</p>
+                        <Link to="/detail" className="text-sm text-white bg-blue-900 px-4 py-1 rounded-lg ml-32 mt-1 hover:bg-violet-600 ">More</Link>
                       </div>
                     </div>
 
@@ -52,8 +53,8 @@ export default function Recomendation() {
                         <p>Book Title</p>
                         <p>Author</p>
                         <p>Publisher date</p>
-                        <p>Publisher</p>
-                        <button className="text-sm text-white bg-blue-900 px-4 py-1 rounded-lg ml-32 mt-1">More</button>
+                        <p className='mb-2'>Publisher</p>
+                        <Link to="/detail" className="text-sm text-white bg-blue-900 px-4 py-1 rounded-lg ml-32 mt-1 hover:bg-violet-600">More</Link>
                       </div>
                     </div>
 

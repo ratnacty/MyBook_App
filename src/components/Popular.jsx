@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
+import { Link } from 'react-router-dom'
 import book1 from "../assets/book1.jpg"
 import book2 from "../assets/book2.png"
 
@@ -10,12 +11,12 @@ export default function Popular() {
                   
                   <div className="py-2 block">
                     
-                    <p className="text-3xl text-white font-bold font-serif py-2">Popular Book</p>
-                    <p className="text-lg text-white">Lorem ipsum dolor sit, amet consectetur adipisicing elit. <br />
+                    <p className="text-3xl text-white font-bold font-serif py-2 mb-3">Popular Book</p>
+                    <p className="text-lg text-white mb-8">Lorem ipsum dolor sit, amet consectetur adipisicing elit. <br />
                      Quae eligendi maxime sunt animi, perspiciatis assumenda. <br />
                      Quae eligendi maxime sunt animi, perspiciatis assumenda.</p>
 
-                     <button className="py-2 px-2 bg-white text-blue-900 text-sm mt-5 rounded shadow-slate-700 shadow-lg hover:bg-violet-600 hover:text-white">Explore More</button>
+                     <Link to="/all-category" className="py-2 px-2 bg-white text-blue-900 text-sm rounded shadow-slate-700 shadow-lg hover:bg-violet-600 hover:text-white">Explore More</Link>
                   </div>
 
                   <div className="flex">

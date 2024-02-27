@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
+import { Link } from 'react-router-dom'
 import SubHeader from '../components/SubHeader'
 import Footer from '../components/Footer'
 import recomend3 from "../assets/recomend3.png"
@@ -27,13 +28,15 @@ export default function Collection() {
                   <p className='text-blue-900 text-sm font-serif font-semibold'>22 Januari 2016</p>
                   <p className='text-blue-900 text-sm font-serif font-semibold'>Hollywood</p>
 
-                  <div className='text-blue-900 text-normal mt-3 '>
+                  <div className='text-blue-900 text-normal mt-3 mb-5 '>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, tenetur
                     <br />Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, esse. hay kiaous 
                     </p>
                   </div>
 
-                  <button className='bg-blue-900 text-white px-3 py-1 mt-3 rounded-lg'>View more</button>
+                  <Link to="/detail" className='bg-blue-900 text-white px-3 py-1 mt-8 rounded-lg'>
+                    View more
+                  </Link>
                 </div>
             </div>
 
