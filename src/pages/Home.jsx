@@ -8,49 +8,35 @@ import NewCollection from "../components/NewCollection";
 import Follow from "../components/Follow";
 import Footer from "../components/Footer";
 
-
 export default function Home() {
   return (
-    <div >
+    <div>
       <div className="w-full mb-14 ">
-
         <div className=" py-8 w-11/12 mx-auto ">
+          <HeaderHome />
 
-          
-            <HeaderHome/>
-            
-            
-             <div className="w-full px-10 py-8 mb-5">
+          <div className="w-full px-10 py-8 mb-5">
+            <Popular />
 
-         
-                <Popular/>
-              
+            <div className="w-full mt-5 border-2 border-solid border-violet-200 h-86  py-5 rounded-xl ">
+              <Recomendation />
 
-                <div className="w-full mt-5 border-2 border-solid border-violet-200 h-86  py-5 rounded-xl">
+              <NewCollection />
+            </div>
+          </div>
 
-                  <Recomendation/>
+          <div className="w-full px-10">
+            <div className="w-full bg-violet-400 h-24 text-white text-normal font-semibold text-center py-5 rounded-lg max-sm:py-3">
+              <p>Get More Information by Login as Readers</p>
+              <p>Also Feel Free to Contact Us</p>
+            </div>
 
-                  <NewCollection/>
-
-                </div>
-
-             </div>  
-
-
-             <div className="w-full px-10">
-                <div className="w-full bg-violet-400 h-24 text-white text-normal font-semibold text-center py-5 rounded-lg">
-                    <p>Get More Information by Login as Readers</p>
-                    <p>Also Feel Free to Contact Us</p>
-                </div>
-
-                <Follow/>
-             </div>
+            <Follow />
+          </div>
         </div>
-
       </div>
-     
-     <Footer/>
+
+      <Footer />
     </div>
-   
-  )
+  );
 }
