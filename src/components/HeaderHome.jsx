@@ -16,7 +16,7 @@ export default function HeaderHome() {
           to="/all-category"
           className="text-blue-900 font-semibold mt-2 hover:text-violet-600"
         >
-          All Category
+          All
         </Link>
         <Link
           to="/collection"
