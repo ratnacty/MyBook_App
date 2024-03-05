@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Footer from "../components/Footer";
 import SubHeader from "../components/SubHeader";
+import { fetchBooks } from "../components/api";
 
 export default function AllCategory() {
   const [books, setBooks] = useState([]);
@@ -24,62 +25,62 @@ export default function AllCategory() {
   const titleLengthThreshold = 30;
 
   useEffect(() => {
-    fetchBooks();
-  }, [apiKey, selectedCategory]);
+    console.log("Selected Category:", selectedCategory);
+    fetchBooks(selectedCategory).then((data) => setBooks(data));
+  }, [selectedCategory]);
+  // const fetchBooks = async () => {
+  //   let apiUrl = "";
 
-  const fetchBooks = async () => {
-    let apiUrl = "";
+  //   switch (selectedCategory) {
+  //     case "popular":
+  //       apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:inauthor:new&key=${apiKey}&orderBy=relevance`;
+  //       break;
+  //     case "latest":
+  //       apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:new&key=${apiKey}&orderBy=newest`;
+  //       break;
+  //     case "romance":
+  //       apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:romance&key=${apiKey}&orderBy=newest`;
+  //       break;
+  //     case "science":
+  //       apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:science+edu&key=${apiKey}&orderBy=newest`;
+  //       break;
+  //     case "fiction":
+  //       apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:fiction&key=${apiKey}&orderBy=newest`;
+  //       break;
+  //     case "music":
+  //       apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:music&key=${apiKey}&orderBy=newest`;
+  //       break;
+  //     case "art":
+  //       apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:seni&key=${apiKey}&orderBy=newest`;
+  //       break;
+  //     case "random":
+  //       apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:random&key=${apiKey}&orderBy=newest`;
+  //       break;
+  //     case "novel":
+  //       apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:novel&key=${apiKey}&orderBy=newest`;
+  //       break;
+  //     case "history":
+  //       apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:history&key=${apiKey}&orderBy=newest`;
+  //       break;
+  //     default:
+  //       console.error(`Invalid category: ${selectedCategory}`);
+  //       return;
+  //   }
 
-    switch (selectedCategory) {
-      case "popular":
-        apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:bestsellers&key=${apiKey}&orderBy=relevance`;
-        break;
-      case "latest":
-        apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:new&key=${apiKey}&orderBy=newest`;
-        break;
-      case "romance":
-        apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:romance&key=${apiKey}&orderBy=newest`;
-        break;
-      case "science":
-        apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:science+edu&key=${apiKey}&orderBy=newest`;
-        break;
-      case "fiction":
-        apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:fiction&key=${apiKey}&orderBy=newest`;
-        break;
-      case "music":
-        apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:music&key=${apiKey}&orderBy=newest`;
-        break;
-      case "art":
-        apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:seni&key=${apiKey}&orderBy=newest`;
-        break;
-      case "random":
-        apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:random&key=${apiKey}&orderBy=newest`;
-        break;
-      case "novel":
-        apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:novel&key=${apiKey}&orderBy=newest`;
-        break;
-      case "history":
-        apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:history&key=${apiKey}&orderBy=newest`;
-        break;
-      default:
-        console.error(`Invalid category: ${selectedCategory}`);
-        return;
-    }
-
-    try {
-      const response = await axios.get(apiUrl);
-      if (response.data.items) {
-        const filteredBooks = response.data.items.filter(
-          (book) => book.volumeInfo.title.length <= titleLengthThreshold
-        );
-        setBooks(filteredBooks);
-      } else {
-        console.error("No items found in the response:", response);
-      }
-    } catch (error) {
-      console.error(`Error fetching ${selectedCategory} books:`, error);
-    }
-  };
+  //   try {
+  //     const response = await axios.get(apiUrl);
+  //     if (response.data.items) {
+  //       const filteredBooks = response.data.items.filter(
+  //         (book) => book.volumeInfo.title.length <= titleLengthThreshold
+  //       );
+  //       setBooks(filteredBooks);
+  //     } else {
+  //       console.error("No items found in the response:", response);
+  //     }
+  //   } catch (error) {
+  //     console.error(`Error fetching ${selectedCategory} books:`, error);
+  //   }
+  // };
 
   const fetchRandomBooks = async () => {
     const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=a+love&key=${apiKey}&orderBy=relevance`;
@@ -185,8 +186,7 @@ export default function AllCategory() {
                       {book.volumeInfo.title}
                     </h2>
                     <p className="text-xs text-slate-500 mb-2">
-                      by{" "}
-                      {book.volumeInfo.authors.join(", ") || "Unknown Author"}
+                      by {book.volumeInfo.authors || "Unknown Author"}
                     </p>
                   </div>
 
