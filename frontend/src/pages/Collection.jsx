@@ -4,10 +4,42 @@ import { Link } from "react-router-dom";
 import SubHeader from "../components/SubHeader";
 import Footer from "../components/Footer";
 import { fetchBooks } from "../components/api";
+import { handleSearchBook } from "../components/api";
 
 export default function Collection() {
   const [books, setBooks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const titleLengthThreshold = 30;
+
+  const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSearch = async () => {
+    if (searchTerm.trim() === "") {
+      fetchBooks();
+    } else {
+      const data = await handleSearchBook(searchTerm, apiKey)
+      setBooks(data)
+      // const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&key=${apiKey}&orderBy=relevance`;
+      // try {
+      //   const response = await axios.get(apiUrl);
+      //   if (response.data.items) {
+      //     const filteredBooks = response.data.items.filter(
+      //       (book) => book.volumeInfo.title.length <= titleLengthThreshold
+      //     );
+      //     setBooks(filteredBooks);
+      //   } else {
+      //     console.error("No items found in the response:", response);
+      //   }
+      // } catch (error) {
+      //   console.error("Error fetching books:", error);
+      // }
+    }
+  };
+
 
   useEffect(() => {
     // Fetch recommended books
@@ -16,7 +48,11 @@ export default function Collection() {
   return (
     <div>
       <div className="w-full mb-20">
-        <SubHeader />
+        <SubHeader
+          searchTerm={searchTerm}
+          onSearchChange={handleSearchChange}
+          onSearch={handleSearch}
+        />
 
         <div className="lg:w-8/12 md:10/12 md:mx-10 md:px-1 md:py-2 max-sm:3/4 mb-3 mt-5 lg:px-14 py-5 bg-white shadow-xl lg:mx-auto rounded-lg ">
           {books.map((book) => (

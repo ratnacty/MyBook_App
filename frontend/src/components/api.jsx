@@ -64,3 +64,20 @@ export const bookmarkBook = async (googleId) => {
     throw error; // Rethrow the error to handle it in the calling component
   }
 };
+
+export const handleSearchBook = async (searchTerm, apiKey) => {
+  const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&key=${apiKey}&orderBy=relevance`;
+  try {
+    const response = await axios.get(apiUrl);
+    if (response.data.items) {
+      const filteredBooks = response.data.items.filter(
+        (book) => book.volumeInfo.title.length <= titleLengthThreshold
+      );
+      return filteredBooks;
+    } else {
+      console.error("No items found in the response:", response);
+    }
+  } catch (error) {
+    console.error("Error fetching books:", error);
+  }
+}

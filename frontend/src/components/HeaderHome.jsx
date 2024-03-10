@@ -37,12 +37,26 @@ const HeaderHome = () => {
 
         {/* Conditional rendering based on authentication status */}
         {isLoggedIn ? (
-          <button
-            onClick={handleLogout}
-            className="ml-10 px-4 py-2 bg-yellow-900 rounded text-white hover:bg-yellow-800"
-          >
-            Logout
-          </button>
+          <>
+            <Link
+              to={'/bookmarks'}
+              className="text-blue-900 font-semibold mt-2 hover:text-violet-600"
+            >
+              Bookmark
+            </Link>
+            <Link
+              to={'/favorites'}
+              className="text-blue-900 font-semibold mt-2 hover:text-violet-600"
+            >
+              Favorite
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="ml-10 px-4 py-2 bg-yellow-900 rounded text-white hover:bg-yellow-800"
+            >
+              Logout
+            </button>
+          </>
         ) : (
           <Link
             to="/login"

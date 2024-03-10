@@ -5,11 +5,18 @@ import Footer from "../components/Footer";
 import SubHeader from "../components/SubHeader";
 import { fetchBooks } from "../components/api";
 import { Link } from "react-router-dom";
+import { handleSearchBook } from "../components/api";
+import { FaBookmark } from "react-icons/fa";
+import { MdFavorite } from "react-icons/md";
 
 export default function AllCategory() {
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("latest");
+  const [isBookmarkedModal, setIsBookmarkedModal] = useState(false);
+  const [isBookmarkedSuccess, setIsBookmarkedSuccess] = useState(false);
+  const [isFavoriteModal, setIsFavoriteModal] = useState(false);
+  const [isFavoriteSuccess, setIsFavoriteSuccess] = useState(false);
   const [categories, setCategories] = useState([
     "popular",
     "latest",
@@ -113,20 +120,22 @@ export default function AllCategory() {
     if (searchTerm.trim() === "") {
       fetchBooks();
     } else {
-      const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&key=${apiKey}&orderBy=relevance`;
-      try {
-        const response = await axios.get(apiUrl);
-        if (response.data.items) {
-          const filteredBooks = response.data.items.filter(
-            (book) => book.volumeInfo.title.length <= titleLengthThreshold
-          );
-          setBooks(filteredBooks);
-        } else {
-          console.error("No items found in the response:", response);
-        }
-      } catch (error) {
-        console.error("Error fetching books:", error);
-      }
+      const data = await handleSearchBook(searchTerm, apiKey)
+      setBooks(data)
+      // const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&key=${apiKey}&orderBy=relevance`;
+      // try {
+      //   const response = await axios.get(apiUrl);
+      //   if (response.data.items) {
+      //     const filteredBooks = response.data.items.filter(
+      //       (book) => book.volumeInfo.title.length <= titleLengthThreshold
+      //     );
+      //     setBooks(filteredBooks);
+      //   } else {
+      //     console.error("No items found in the response:", response);
+      //   }
+      // } catch (error) {
+      //   console.error("Error fetching books:", error);
+      // }
     }
   };
 
@@ -137,7 +146,7 @@ export default function AllCategory() {
         const token = localStorage.getItem("token");
         console.log(token);
 
-        const response = await axios.get(
+        await axios.get(
           `http://localhost:5000/bookmark/${googleId}`,
 
           {
@@ -146,11 +155,23 @@ export default function AllCategory() {
             },
           }
         );
-
+        
         console.log(googleId);
         console.log(`Book ${googleId} bookmarked successfully!`);
+        setIsBookmarkedSuccess(true);
+        setIsBookmarkedModal(true);
+        
+        setTimeout(() => {
+          setIsBookmarkedModal(false);
+        }, 3000);
       } catch (error) {
         console.error("Error bookmarking book:", error);
+        setIsBookmarkedSuccess(false);
+        setIsBookmarkedModal(true);
+
+        setTimeout(() => {
+          setIsBookmarkedModal(false);
+        }, 3000);
       }
     }
   };
@@ -162,7 +183,7 @@ export default function AllCategory() {
         const token = localStorage.getItem("token");
         console.log(token);
 
-        const response = await axios.get(
+        await axios.get(
           `http://localhost:5000/favorite/${googleId}`,
 
           {
@@ -174,14 +195,38 @@ export default function AllCategory() {
 
         console.log(googleId);
         console.log(`Book ${googleId} add to favorite successfully!`);
+        setIsFavoriteSuccess(true);
+        setIsFavoriteModal(true);
+        
+        setTimeout(() => {
+          setIsFavoriteModal(false);
+        }, 3000);
       } catch (error) {
         console.error("Error Favorite book:", error);
+        setIsFavoriteSuccess(false);
+        setIsFavoriteModal(true);
+
+        setTimeout(() => {
+          setIsFavoriteModal(false);
+        }, 3000);
       }
     }
   };
 
   return (
     <div>
+      <div className={`fixed right-10 bottom-28 bg-violet-500 rounded-md ${isBookmarkedModal ? "block" : "hidden"}`}>
+        <div className="flex justify-between items-center w-[calc(fit-content+2rem)] w- p-4">
+          <div className="text-white">{isBookmarkedSuccess ? "Successfully added to bookmark" : "Already addded to bookmark"}</div>
+          <button onClick={() => setIsBookmarkedModal(false)}>X</button>
+        </div>
+      </div>
+      <div className={`fixed right-10 bottom-28 bg-violet-500 rounded-md ${isFavoriteModal ? "block" : "hidden"}`}>
+        <div className="flex justify-between items-center w-[calc(fit-content+2rem)] w- p-4">
+          <div className="text-white">{isFavoriteSuccess ? "Successfully added to favorite" : "Already added to favorite"}</div>
+          <button onClick={() => setIsFavoriteModal(false)}>X</button>
+        </div>
+      </div>
       <div className="w-full mb-20">
         <SubHeader
           searchTerm={searchTerm}
@@ -228,13 +273,13 @@ export default function AllCategory() {
                       onClick={() => handleBookmark(book)}
                       className="py-1 px-2 rounded-lg text-white text-sm bg-violet-500 my-2"
                     >
-                      Bookmark
+                      <FaBookmark size={16}/>
                     </button>
                     <button
                       onClick={() => handleFavorite(book)}
                       className="py-1 px-2 rounded-lg text-white text-sm bg-violet-500 my-2"
                     >
-                      Favorite
+                      <MdFavorite size={16}/>
                     </button>
                   </div>
                   <img

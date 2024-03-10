@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function Recomendation() {
   const [books, setBooks] = useState([]);
+  console.log(books)
 
   useEffect(() => {
     // Fetch recommended books

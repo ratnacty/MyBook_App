@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { FaAngleDoubleLeft } from "react-icons/fa";
 
 export default function Favorites() {
   const [favorites, setFavorites] = useState([]);
@@ -74,8 +75,16 @@ export default function Favorites() {
   return (
     <div className="w-full mb-20">
       <div className="w-11/12 flex flex-col justify-center gap-2 lg:mx-20 md:mx-14 mt-5 lg:py-3">
-        <div className="text-3xl text-blue-900 mb-5 font-semibold text-center mt-5">
-          Favorite Page
+        <div className="flex justify-between items-center px-14">
+          <button>
+            <Link to="/"><FaAngleDoubleLeft size={32} className="text-blue-900"/></Link>
+          </button>
+          <div className="text-3xl text-blue-900 mb-5 font-semibold text-center mt-5">
+            Favorite Page
+          </div>
+          <button className="invisible">
+            <Link to="/">Back</Link>
+          </button>
         </div>
         <div className="basis-11/12 flex gap-3  mt-5">
           <div className="grid lg:grid-cols-5 w-full lg:gap-6 gap-2 md:grid-cols-4 max-sm:grid-cols-2 md:gap-3 max-sm:gap-4 max-sm:ml-3 ">

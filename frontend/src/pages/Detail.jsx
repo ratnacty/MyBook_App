@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { fetchBooks, fetchBookDetails } from "../components/api";
 import { bookmarkBook } from "../components/api";
 import axios from "axios";
@@ -22,6 +22,10 @@ export default function Detail() {
   if (!bookDetails) {
     return <p>Loading...</p>;
   }
+
+  // const handleReadMore = (link) => {
+  //   alert(link)
+  // }
 
   // const googleId = bookId;
   // const title = bookDetails.volumeInfo.title;
@@ -59,20 +63,20 @@ export default function Detail() {
               </p>
 
               <div className="flex gap-4 mt-3">
-                <button
+                {/* <button
                   onClick={handleBookmark}
                   className="bg-violet-500 text-white px-2 py-1  rounded-lg hover:bg-violet-700"
                 >
                   add bookmark
-                </button>
-                <button className="bg-violet-500 text-white px-2 py-1 rounded-lg hover:bg-violet-700">
+                </button> */}
+                {/* <button className="bg-violet-500 text-white px-2 py-1 rounded-lg hover:bg-violet-700">
                   add favorite
-                </button>
+                </button> */}
               </div>
 
-              <button className="bg-blue-900 text-white px-3 py-1 mt-5 rounded-lg">
-                Read more
-              </button>
+              <NavLink to={bookDetails.volumeInfo.previewLink} className="bg-blue-900 text-white px-3 py-1 mt-5 rounded-lg">
+                Preview link
+              </NavLink>
             </div>
           </div>
 

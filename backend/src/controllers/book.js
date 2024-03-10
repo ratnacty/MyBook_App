@@ -36,6 +36,24 @@ export const bookmark = async (req, res, next) => {
   }
 };
 
+export const remove_bookmark = async (req, res, next) => {
+  const { googleId } = req.params;
+  const userId = req.user.id
+
+  try {
+    const removeBookmark = await prisma.bookmark.delete({
+      data: {
+        userId,
+        googleId,
+      },
+    });
+    res.json({ message: "Bookmark removed successfully", remove: removeBookmark });
+  } catch (error) {
+    console.error("Remove failed:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
 export const favorite = async (req, res, next) => {
   const { googleId } = req.params;
   const userId = req.user.id;
